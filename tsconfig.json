@@ -1,7 +1,7 @@
 {
-	"compilerOptions": {
-		"noEmit": true,
-		"baseUrl": ".",
-        "allowImportingTsExtensions": true,
-	}
+  "compilerOptions": {
+    "noEmit": true,
+    "baseUrl": ".",
+    "allowImportingTsExtensions": true
+  }
 }
