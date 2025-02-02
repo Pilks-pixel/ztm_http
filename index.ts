@@ -10,7 +10,7 @@ const server = createServer((req, res) => {
   console.log(req.url.split("/"), req.method, req.url);
   const url = req.url.split("/");
 
-  if (req.method === "GET") {
+  if (req.method === "GET" && url[1] === "friends") {
     if (url.length === 3) {
       const id = url[2];
       if (friends[id]) {
@@ -21,6 +21,12 @@ const server = createServer((req, res) => {
     } else {
       res.end(JSON.stringify({ data: friends }));
     }
+  } else if (req.method === "POST" && url[1] === "friends") {
+    req.on("data", data => {
+      const friend = data.toString();
+      console.log("Request:", friend);
+      friends.push(JSON.parse(friend));
+    });
   } else {
     handle404(res);
   }
