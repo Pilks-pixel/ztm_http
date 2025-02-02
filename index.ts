@@ -12,31 +12,34 @@ const server = createServer((req, res) => {
   console.log(req.url.split('/'), req.method, req.url);
   const url = req.url.split('/');
 
-  if (req.method === 'GET' && url.length === 2) {
-  res.end(JSON.stringify({data: friends}));
-    } else if (req.method === 'GET' && url.length === 3) {
+  if (req.method === 'GET') {
+     
+    if(url.length === 3) {
         const id = url[2];
-        try {
-            res.end(JSON.stringify({data: friends[id]}));
-        } catch (error) {
+        if(friends[id]) {
+            getFriend(res, id);
+        } else {
             handle404(res);
-            throw new Error(`Not Found - ${error}'`);
-            
         }
-        // id? console.log(friends[id].name): console.log('no id');
-        res.end(JSON.stringify({data: friends[id].name, id}))
+        
+    } else {
+        res.end(JSON.stringify({data: friends}));
+    }
 
     } else {
-        console.log(res);
         handle404(res);
     }
 
 });
 
-// function
+// Functions
 function handle404(res) {
-    res.writeHead(404, {'Content-Type': 'application/json'});
+    res.statusCode = 404;
     res.end(JSON.stringify({message: 'Not Found'}));
+}
+
+function getFriend(res, id) {
+    res.end(JSON.stringify({data: friends[id]}));
 }
 
 // Type definition
