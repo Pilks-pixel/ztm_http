@@ -1,6 +1,7 @@
 {
 	"compilerOptions": {
 		"noEmit": true,
-		"baseUrl": "."
+		"baseUrl": ".",
+        "allowImportingTsExtensions": true,
 	}
 }
