@@ -19,6 +19,7 @@ const server = createServer((req, res) => {
         handle404(res);
       }
     } else {
+      res.statusCode = 200;
       res.end(JSON.stringify({ data: friends }));
     }
   } else if (req.method === "POST" && url[1] === "friends") {
@@ -27,6 +28,7 @@ const server = createServer((req, res) => {
       console.log("Request:", friend);
       friends.push(JSON.parse(friend));
     });
+    req.pipe(res);
   } else {
     handle404(res);
   }
@@ -39,6 +41,7 @@ function handle404(res) {
 }
 
 function getFriend(res, id) {
+  res.statusCode = 200;
   res.end(JSON.stringify({ data: friends[id] }));
 }
 
