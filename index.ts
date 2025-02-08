@@ -6,7 +6,7 @@ type Friend = {
 };
 
 const server = createServer((req, res) => {
-  res.writeHead(200, { "Content-Type": "application/json" });
+  // res.writeHead(200, { "Content-Type": "application/json" });
   console.log(req.url.split("/"), req.method, req.url);
   const url = req.url.split("/");
 
